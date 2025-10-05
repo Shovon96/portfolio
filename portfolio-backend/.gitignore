@@ -4,5 +4,4 @@ node_modules
 dist
 
 .gitignore
-src/app/modules/project
 src/app/modules/blog
