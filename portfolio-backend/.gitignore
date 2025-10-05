@@ -3,4 +3,5 @@ node_modules
 .vercel
 dist
 
-src/app
+.gitignore
+src/app/modules
