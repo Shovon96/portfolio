@@ -3,5 +3,3 @@ node_modules
 .vercel
 dist
 
-.gitignore
-src/app/modules/blog
