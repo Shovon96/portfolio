@@ -11,6 +11,28 @@ const createSkill=async(req:Request,res:Response)=>{
         }
 }
 
+const getAllSkills=async(req:Request,res:Response)=>{
+    try {
+        const verifiedUser=req.user
+          const getAllSkills=await skillService.getAllSkills(verifiedUser)
+           res.status(201).json(getAllSkills);
+        } catch (error:any) {
+           res.status(400).json(error.message);
+        }
+}
+
+const updateSkill=async(req:Request,res:Response)=>{
+    try {
+           const id=Number(req.params.id)
+          const updatedSkill=await skillService.updateSkill(id,req.body)
+           res.status(201).json(updatedSkill);
+        } catch (error:any) {
+           res.status(400).json(error.message);
+        }
+}
+
 export const skillController={
-    createSkill
+    createSkill,
+    getAllSkills,
+    updateSkill
 }

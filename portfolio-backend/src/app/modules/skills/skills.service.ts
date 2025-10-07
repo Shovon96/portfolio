@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client"
+import { Prisma, Skill } from "@prisma/client"
 import { JwtPayload } from "jsonwebtoken"
 import { prisma } from "../../config/db"
 
@@ -23,6 +23,25 @@ const createSkill = async (payload: Prisma.SkillCreateInput, decodedUser: JwtPay
 }
 
 
+const getAllSkills=async(decodedUser:JwtPayload)=>{
+      const getAllSkills=await prisma.skill.findMany({
+        where:{userId:decodedUser.id}
+      })
+
+      return getAllSkills
+}
+
+const updateSkill=async(id:number,payload:Partial<Skill>)=>{
+      const updatedSkill=await prisma.skill.update({
+        where:{id},
+        data:payload
+      })
+
+      return updatedSkill
+}
+
 export const skillService = {
-    createSkill
+    createSkill,
+    getAllSkills,
+    updateSkill
 }

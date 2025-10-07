@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import expressSession from "express-session"
 import { projectRouter } from "./app/modules/project/project.route";
 import { blogRouter } from "./app/modules/blog/blog.route";
+import { skillsRouter } from "./app/modules/skills/skills.route";
 
 const app=express()
 
@@ -21,9 +22,11 @@ app.use("/api/v1",userRoutes)
 app.use("/api/v1",authRouter)
 app.use("/api/v1",projectRouter)
 app.use("/api/v1",blogRouter)
+app.use("/api/v1",skillsRouter)
+
 
 app.get("/", (req, res) => {
-  res.send("Protfolio server is running");
+  res.send("Portfolio server is running");
 });
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
