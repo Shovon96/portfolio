@@ -23,10 +23,8 @@ const createSkill = async (payload: Prisma.SkillCreateInput, decodedUser: JwtPay
 }
 
 
-const getAllSkills=async(decodedUser:JwtPayload)=>{
-      const getAllSkills=await prisma.skill.findMany({
-        where:{userId:decodedUser.id}
-      })
+const getAllSkills=async()=>{
+      const getAllSkills=await prisma.skill.findMany()
 
       return getAllSkills
 }
@@ -40,8 +38,17 @@ const updateSkill=async(id:number,payload:Partial<Skill>)=>{
       return updatedSkill
 }
 
+const deleteSingleSkill=async(id:number)=>{
+      const deletedSkill=await prisma.skill.delete({
+        where:{id}
+      })
+
+      return deletedSkill
+}
+
 export const skillService = {
     createSkill,
     getAllSkills,
-    updateSkill
+    updateSkill,
+    deleteSingleSkill
 }
