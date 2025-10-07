@@ -35,6 +35,7 @@ model User{
   updatedAt   DateTime  @updatedAt
   projects Project[]
   blogs Blog[]
+  skill Skill[]
 }
 
 enum Role {
@@ -63,6 +64,14 @@ model Blog {
   content     String
   imageUrl    String?
   publishedAt DateTime @default(now())
+  userId Int
+  user User @relation(fields: [userId],references: [id])
+}
+
+model Skill {
+  id          Int      @id @default(autoincrement())
+  title       String
+  imageUrl    String?
   userId Int
   user User @relation(fields: [userId],references: [id])
 }
