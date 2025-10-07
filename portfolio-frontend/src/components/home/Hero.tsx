@@ -34,13 +34,13 @@ export default function Hero() {
                     </Link>
 
                     <Link href="#contact">
-                        <CustomButton buttonText="HIRE ME" />
+                        <CustomButton buttonText="Hire Me" />
                     </Link>
                 </div>
             </div>
 
             <div className="flex-1 flex justify-center mt-8 md:mt-0 mb-6 md:mb-0 md:ml-0">
-                <div className="rounded-full border-4 border-[#e643a7] shadow-2xl shadow-gray-400 p-2">
+                <div className="rounded-full border-4 border-[#e643a7] shadow-2xl shadow-gray-400">
                     <img
                         src="https://i.ibb.co.com/0jgXw2Lk/Fakhruddin-Ahmed-bg-remove-image-8f100d2b8000-1.png"
                         alt="fakhruddin-ahmed"
