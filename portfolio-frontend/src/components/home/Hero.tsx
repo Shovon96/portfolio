@@ -20,11 +20,11 @@ export default function Hero() {
                     Fakhruddin Ahmed
                 </h1>
                 <h2 className="text-2xl lg:text-3xl font-bold mb-2">
-                    I am a <span className={`text-[#e643a7] ${wrapperClassName}`}>{typedText}</span>
+                    I am a <span className={`text-primary ${wrapperClassName}`}>{typedText}</span>
                 </h2>
                 <p className="text-base font-semibold">
                     Welcome to my portfolio! I am a passionate and skilled{' '}
-                    <span className="text-[#e643a7]">Full-Stack Web Developer</span>.
+                    <span className="text-primary">Full-Stack Web Developer</span>.
                     I am always eager to learn new frameworks/technologies to keep myself updated with the latest market trends.
                 </p>
 
@@ -40,7 +40,7 @@ export default function Hero() {
             </div>
 
             <div className="flex-1 flex justify-center mt-8 md:mt-0 mb-6 md:mb-0 md:ml-0">
-                <div className="rounded-full border-4 border-[#e643a7] shadow-2xl shadow-gray-400">
+                <div className="rounded-full border-4 border-primary shadow-2xl shadow-muted-foreground hover:shadow-chart-5 hover:shadow-2xl transition duration-500">
                     <img
                         src="https://i.ibb.co.com/0jgXw2Lk/Fakhruddin-Ahmed-bg-remove-image-8f100d2b8000-1.png"
                         alt="fakhruddin-ahmed"
