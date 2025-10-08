@@ -49,7 +49,7 @@ export default function Navbar() {
                   href={link.href}
                   className={`font-medium transition-colors ${isActive
                     ? "underline underline-offset-4 text-[#e643a7]"
-                    : "text-muted-foreground hover:text-primary"
+                    : "text-secondary-foreground hover:text-primary"
                     }`}
                 >
                   {link.label}
