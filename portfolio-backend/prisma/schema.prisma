@@ -43,6 +43,11 @@ enum Role {
   USER
 }
 
+enum SkillType {
+  Frontend
+  Backend
+}
+
 model Project {
   id Int @id @default(autoincrement())
   title String
@@ -72,6 +77,7 @@ model Skill {
   id          Int      @id @default(autoincrement())
   title       String
   imageUrl    String?
+  skillType    SkillType  @default(Frontend)
   userId Int
   user User @relation(fields: [userId],references: [id])
 }
