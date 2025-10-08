@@ -22,10 +22,8 @@ const createBlog=async(payload:Prisma.BlogCreateInput,decodedUser:JwtPayload)=>{
       return createBlog
 }
 
-const getAllblogs=async(decodedUser:JwtPayload)=>{
-      const getAllBlog=await prisma.blog.findMany({
-        where:{userId:decodedUser.id}
-      })
+const getAllblogs=async()=>{
+      const getAllBlog=await prisma.blog.findMany()
 
       return getAllBlog
 }

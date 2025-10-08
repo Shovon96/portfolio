@@ -13,8 +13,7 @@ const creatBlog=async(req:Request,res:Response)=>{
 
 const getAllblogs=async(req:Request,res:Response)=>{
     try {
-        const verifiedUser=req.user
-          const getAllBlog=await blogService.getAllblogs(verifiedUser)
+          const getAllBlog=await blogService.getAllblogs()
            res.status(201).json(getAllBlog);
         } catch (error:any) {
            res.status(400).json(error.message);
