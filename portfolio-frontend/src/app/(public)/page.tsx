@@ -1,4 +1,5 @@
 import AboutMe from "@/components/home/AboutMe";
+import Blogs from "@/components/home/Blog";
 import Education from "@/components/home/Education";
 import Hero from "@/components/home/Hero";
 import Project from "@/components/home/Project";
@@ -13,6 +14,7 @@ export default async function HomePage() {
       <Skills />
       <Project />
       <Education />
+      <Blogs />
     </div>
   );
 }
