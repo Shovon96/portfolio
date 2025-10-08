@@ -1,5 +1,6 @@
 import AboutMe from "@/components/home/AboutMe";
 import Hero from "@/components/home/Hero";
+import Project from "@/components/home/Project";
 import Skills from "@/components/home/skills/Skills";
 
 export default async function HomePage() {
@@ -9,6 +10,7 @@ export default async function HomePage() {
       <Hero />
       <AboutMe />
       <Skills />
+      <Project />
     </div>
   );
 }
