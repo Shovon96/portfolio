@@ -50,7 +50,7 @@ const ContactForm = () => {
                             className="border-2 border-primary p-2 rounded-full text-primary hover:text-white hover:bg-[#470742] transition duration-300">
                             <Facebook />
                         </a>
-                        <a href="https://www.linkedin.com/in/fakhruddin-shovon-3a4b77252" target="_blank" rel="noopener noreferrer"
+                        <a href="https://www.linkedin.com/in/fakhruddin-ahmed-3a4b77252" target="_blank" rel="noopener noreferrer"
                             className="border-2 border-primary p-2 rounded-full text-primary hover:text-white hover:bg-[#470742] transition duration-300">
                             <LinkedinIcon />
                         </a>

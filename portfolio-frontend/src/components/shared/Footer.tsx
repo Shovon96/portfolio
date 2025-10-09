@@ -71,12 +71,12 @@ export default function Footer() {
                     <p className="text-sm mt-2 flex items-center gap-2">
                         <span className="text-primary"><Mail /></span>
                         <span className="font-semibold">Email:</span>{" "}
-                        <p className="text-blue-500">fakhruddinshovon@gmail.com</p>
+                        <span className="text-blue-500">fakhruddinshovon@gmail.com</span>
                     </p>
                     <p className="text-sm mt-2 flex items-center gap-2">
                         <span className="text-primary"><Phone /></span>
                         <span className="font-semibold">Phone:</span>{" "}
-                        <p className="text-blue-500">+8801404346079</p>
+                        <span className="text-blue-500">+8801404346079</span>
                     </p>
                     <p className="text-sm mt-2 flex items-center gap-2">
                         <span className="text-primary"><Locate /></span>

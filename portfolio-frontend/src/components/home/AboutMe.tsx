@@ -39,7 +39,7 @@ const AboutMe = () => {
                             className="border-2 border-pink-500 p-2 rounded-full text-pink-500 hover:text-white hover:bg-pink-500 transition duration-300">
                             <Facebook />
                         </a>
-                        <a href="https://www.linkedin.com/in/fakhruddin-shovon-3a4b77252" target="_blank" rel="noopener noreferrer"
+                        <a href="https://www.linkedin.com/in/fakhruddin-ahmed-3a4b77252" target="_blank" rel="noopener noreferrer"
                             className="border-2 border-pink-500 p-2 rounded-full text-pink-500 hover:text-white hover:bg-pink-500 transition duration-300">
                             <LinkedinIcon />
                         </a>

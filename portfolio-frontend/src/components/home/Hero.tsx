@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { Link as ScrollLink } from "react-scroll";
 import { useTypewriter } from "use-typewriter-hook";
 import CustomButton from "../shared/CustomButton";
 import { Download } from "lucide-react";
@@ -33,9 +34,9 @@ export default function Hero() {
                         <CustomButton icon={Download} buttonText="Resume" />
                     </Link>
 
-                    <Link href="#contact">
+                    <ScrollLink to={"contact"} smooth={true} offset={-80} duration={500} spy={true} className="cursor-pointer">
                         <CustomButton buttonText="Hire Me" />
-                    </Link>
+                    </ScrollLink>
                 </div>
             </div>
 
