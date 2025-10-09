@@ -15,7 +15,7 @@ export default function BlogCard({ blog }: { blog: IBlog }) {
 
     return (
         <div className="w-[325px] md:w-[380px] h-[440px] rounded-md bg-[#f1e5ff] border border-[#470742] overflow-hidden">
-            <Link href={`/project-details/${id}`}>
+            <Link href={`/blogs/${id}`}>
                 <img className="w-full object-cover overflow-hidden" src={imageUrl} alt="" />
                 <div className=" px-5 pt-4">
                     <h2 className="text-black text-lg font-bold mb-1">
@@ -32,8 +32,8 @@ export default function BlogCard({ blog }: { blog: IBlog }) {
                 </div>
             </Link>
             <div className="flex justify-between items-center px-5 py-2 rounded-b-md">
-                <p className="text-sm text-gray-700 italic">Publised on:{new Date(publishedAt).toLocaleDateString()}</p>
-                <Link href={"/blog-details"}>
+                <p className="text-sm text-gray-700 italic">Published on: {new Date(publishedAt).toLocaleDateString()}</p>
+                <Link href={`/blogs/${id}`}>
                     <button className="text-sm text-gray-900 border border-primary px-3 py-1 rounded cursor-pointer hover:bg-primary/20 ">
                         Read More
                     </button>
