@@ -5,6 +5,7 @@ import Education from "@/components/home/Education";
 import Hero from "@/components/home/Hero";
 import Project from "@/components/home/Project";
 import Skills from "@/components/home/skills/Skills";
+import Footer from "@/components/shared/Footer";
 
 export default async function HomePage() {
 
@@ -17,6 +18,7 @@ export default async function HomePage() {
       <Education />
       <Blogs />
       <ContactForm />
+      <Footer />
     </div>
   );
 }
