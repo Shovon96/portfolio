@@ -28,7 +28,7 @@ const getAllblogs=async()=>{
       return getAllBlog
 }
 const getSingleblog=async(id:number)=>{
-      const getSingleBlog=await prisma.blog.findMany({
+      const getSingleBlog=await prisma.blog.findUnique({
         where:{id}
       })
 
