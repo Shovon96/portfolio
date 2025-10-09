@@ -13,17 +13,17 @@ export default function Education() {
                 <div className="absolute inset-0 bg-black/80"></div>
 
                 <div className="relative max-w-7xl mx-auto py-20 px-6 text-white z-10">
-                    <div className="relative flex flex-col space-y-16 before:absolute before:left-1/2 before:top-0 before:bottom-0 before:w-[2px] before:bg-primary before:transform before:-translate-x-1/2">
+                    <div className="relative flex flex-col space-y-16 before:absolute md:before:left-1/2 before:top-0 before:bottom-0 before:w-[2px] before:bg-primary before:transform before:-translate-x-1/2">
 
                         {/* Left Side - Education */}
                         <div className="relative flex flex-col md:flex-row">
                             {/* Icon */}
-                            <div className="absolute left-1/2 transform -translate-x-1/2 md:translate-x-0 md:left-[calc(50%-24px)] bg-primary w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10">
+                            <div className="absolute left-0 transform -translate-x-1/2 md:translate-x-0 md:left-[calc(50%-24px)] bg-primary w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10">
                                 <GraduationCap className="text-white text-2xl" />
                             </div>
 
                             {/* Content */}
-                            <div className="md:w-1/2 md:pr-12 md:text-right mt-12 md:mt-0">
+                            <div className="md:w-1/2 md:pr-12 md:text-right mt-12 md:mt-0 ml-4 md:ml-0">
                                 <p className="font-mono italic text-lg font-bold text-primary">
                                     Education
                                 </p>
@@ -41,12 +41,12 @@ export default function Education() {
                         {/* Right Side - Experience */}
                         <div className="relative flex flex-col md:flex-row">
                             {/* Icon */}
-                            <div className="absolute left-1/2 transform -translate-x-1/2 md:translate-x-0 md:left-[calc(50%-24px)] bg-primary w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10">
+                            <div className="absolute left-0 transform -translate-x-1/2 md:translate-x-0 md:left-[calc(50%-24px)] bg-primary w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10">
                                 <CheckCircle className="text-white text-2xl" />
                             </div>
 
                             {/* Content */}
-                            <div className="md:w-1/2 md:pl-12 md:ml-auto mt-12 md:mt-0">
+                            <div className="md:w-1/2 md:pl-12 md:ml-auto mt-12 md:mt-0 ml-4">
                                 <p className="font-mono italic text-lg font-bold text-primary">
                                     Experience
                                 </p>

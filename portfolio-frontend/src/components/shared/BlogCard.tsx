@@ -14,7 +14,7 @@ export default function BlogCard({ blog }: { blog: IBlog }) {
     const { title, content, imageUrl, publishedAt, id } = blog;
 
     return (
-        <div className="w-[380px] h-[440px] rounded-md bg-[#f1e5ff] border border-[#470742] overflow-hidden">
+        <div className="w-[325px] md:w-[380px] h-[440px] rounded-md bg-[#f1e5ff] border border-[#470742] overflow-hidden">
             <Link href={`/project-details/${id}`}>
                 <img className="w-full object-cover overflow-hidden" src={imageUrl} alt="" />
                 <div className=" px-5 pt-4">

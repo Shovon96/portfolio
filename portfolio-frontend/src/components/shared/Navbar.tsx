@@ -1,32 +1,53 @@
 "use client";
 
 import Link from "next/link";
+import { Link as ScrollLink } from "react-scroll";
 import { useState } from "react";
 import { Github, Menu, UserRound, X } from "lucide-react";
 import ThemeToggle from "../theme-toggle";
 import CustomButton from "./CustomButton";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   const linksDesktop = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About Me" },
-    { href: "/project", label: "Projects" },
-    { href: "/blog", label: "Blog" },
-    { href: "/contact", label: "Contact" }
-
+    { href: "home", label: "Home" },
+    { href: "about", label: "About Me" },
+    { href: "projects", label: "Projects" },
+    { href: "blogs", label: "Blogs" },
+    { href: "contact", label: "Contact" }
   ];
+
   const linksMobile = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About Me" },
-    { href: "/project", label: "Projects" },
-    { href: "/blog", label: "Blog" },
-    { href: "/contact", label: "Contact" },
+    { href: "home", label: "Home" },
+    { href: "about", label: "About Me" },
+    { href: "projects", label: "Projects" },
+    { href: "blogs", label: "Blogs" },
+    { href: "contact", label: "Contact" },
     { href: "/login", label: "Login" }
   ];
+
+  const router = useRouter();
+
+  const handleSectionClick = (sectionId: string) => {
+    if (pathname !== "/") {
+      sessionStorage.setItem("scrollToSection", sectionId);
+      router.push("/");
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "end" });
+      }
+    }
+    setIsOpen?.(false);
+  };
+
+  const handlePageClick = (href: string) => {
+    router.push(href);
+    setIsOpen?.(false);
+  };
 
   return (
     <nav className="w-full sticky top-0 z-50 border-b bg-white/40 backdrop-blur-md dark:bg-black/80">
@@ -41,19 +62,19 @@ export default function Navbar() {
           {/* Desktop Links */}
           <div className="hidden md:flex space-x-6">
             {linksDesktop.map((link) => {
-              const isActive = pathname === link.href;
-
               return (
-                <Link
+                <ScrollLink
+                  to={link.href}
+                  smooth={true}
+                  offset={-80}
+                  duration={500}
                   key={link.href}
-                  href={link.href}
-                  className={`font-medium transition-colors ${isActive
-                    ? "underline underline-offset-4 text-[#e643a7]"
-                    : "text-secondary-foreground hover:text-primary"
-                    }`}
+                  spy={true}
+                  activeClass="text-[#e643a7] underline underline-offset-4"
+                  className="cursor-pointer hover:text-[#e643a7] transition-colors"
                 >
                   {link.label}
-                </Link>
+                </ScrollLink>
               );
             })}
           </div>
@@ -75,17 +96,26 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden border-t bg-white/95 dark:bg-black/95 backdrop-blur">
-          <div className="flex flex-col space-y-2 p-4">
-            {linksMobile.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="flex flex-col space-y-3 p-4">
+            {linksMobile?.map((link) =>
+              link.href.startsWith("/") ? (
+                <button
+                  key={link.href}
+                  onClick={() => handlePageClick(link.href)}
+                  className="cursor-pointer text-left hover:text-[#e643a7] transition-colors"
+                >
+                  {link.label}
+                </button>
+              ) : (
+                <button
+                  key={link.href}
+                  onClick={() => handleSectionClick(link.href)}
+                  className="cursor-pointer text-left hover:text-[#e643a7] transition-colors"
+                >
+                  {link.label}
+                </button>
+              )
+            )}
           </div>
         </div>
       )}

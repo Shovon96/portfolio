@@ -10,7 +10,7 @@ export default async function Blogs() {
   const blogsData = await res.json();
   // console.log(blogsData)
   return (
-    <div className="max-w-7xl mx-auto my-12 px-8">
+    <div id="blogs" className="max-w-7xl mx-auto my-12 px-8">
       <div className="flex items-center justify-center gap-3 my-12">
         <span className="h-[4px] mt-2 w-10 sm:w-16 md:w-42 bg-primary"></span>
         <span className="text-4xl md:text-5xl font-extrabold">Leatest</span>
@@ -25,7 +25,7 @@ export default async function Blogs() {
         }
       </div>
       {/* {blogsData?.length > 3 && ( */}
-          <Link href="/blog" className="flex justify-center pt-4">
+          <Link href="/blogs" className="flex justify-center pt-4">
             <CustomButton buttonText="See More" />
           </Link>
         {/*  )} */}

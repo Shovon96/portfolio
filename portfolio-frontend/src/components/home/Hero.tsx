@@ -13,7 +13,7 @@ export default function Hero() {
         loop: true,
     });
     return (
-        <div id="home" className="md:flex bg-transparent lg:py-16 py-8 max-w-7xl mx-auto">
+        <div id="home" className="flex flex-col-reverse md:flex-row bg-transparent lg:py-16 py-8 max-w-7xl mx-auto">
             <div className="flex-1 text-foreground items-start px-4 sm:px-6 lg:px-8">
                 <h3 className="text-2xl font-bold">Hi, There 👋 I am</h3>
                 <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold my-3">
