@@ -17,7 +17,7 @@ export default function ProjectCard({ project }: { project: IProjectCard }) {
     
     return (
         <div className="w-[325px] md:w-[350px] h-[420px] md:h-[440px] rounded-md border border-[#470742] overflow-hidden transition duration-500 hover:scale-[1.02] bg-[#470742]">
-            <Link href={`/project-details/${id}`}>
+            <Link href={`/project/${id}`}>
                 <img className="w-full px-3 pt-3 object-cover overflow-hidden" src={imageUrl} alt="" />
                 <div className="bg-[#f1e5ff] px-5 pt-4">
                     <h2 className="text-black text-lg font-bold mb-1">
