@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { json, z } from "zod"
+import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
   Form,
@@ -16,9 +16,10 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
 import Password from "../ui/Password"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
+import Link from "next/link"
 
 export const Role = z.enum(["USER", "ADMIN"] as const, { message: "Role is required" })
 
@@ -29,11 +30,11 @@ const formSchema = z.object({
   bio: z.string().optional(),
   avatarUrl: z.string().url("Must be a valid URL").optional(),
   location: z.string().optional(),
-  github: z.string().url().optional(),
-  linkedin: z.string().url().optional(),
-  facebook: z.string().url().optional(),
-  twitter: z.string().url().optional(),
-  Role: Role 
+  github: z.string().optional(),
+  linkedin: z.string().optional(),
+  facebook: z.string().optional(),
+  twitter: z.string().optional(),
+  Role: Role
 })
 
 export default function RegisterForm() {
@@ -55,34 +56,41 @@ export default function RegisterForm() {
   })
   const router = useRouter()
   const [loading, setLoading] = useState(false)
-  
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true)
-    console.log(values)
-    const res=await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/create-user`,{
-      method:"POST",
-       headers: {
-        "Content-Type": "application/json",
-      },
-      body:JSON.stringify(values)
-      
-    })
-    const data=await res.json()
-    router.push("/")
-    
-    } catch (error:any) {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/create-user`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values)
+
+      })
+      const data = await res.json()
+      // console.log(data)
+      if (data) {
+        toast.success("User registered successfully")
+        router.push("/")
+      } else {
+        toast.error(data.message || "Registration failed")
+      }
+      setLoading(false)
+
+    } catch (error: any) {
       console.log(error.message)
     }
-   
+
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-purple-200 via-pink-100 to-blue-100 p-6">
-      <Card className="w-full max-w-2xl shadow-2xl rounded-2xl backdrop-blur bg-white/80">
+    <div className="flex justify-center items-center p-12"
+      style={{ backgroundImage: 'url("https://i.ibb.co.com/4nDvt3Rv/login-background-image.png")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <Card className="w-full max-w-2xl shadow-2xl rounded-2xl bg-white/40 backdrop-blur-md dark:bg-black/80">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center text-gray-800">
-            Create Your Account 🚀
+          <CardTitle className="text-2xl font-bold text-center text-primary">
+            Create Your Account
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -122,23 +130,20 @@ export default function RegisterForm() {
               />
 
               {/* Password */}
-             <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Password {...field} />
-                  </FormControl>
-                  <FormDescription className="sr-only">
-                    This is your public display name.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-        
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Password {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               {/* Avatar URL */}
               <FormField
                 control={form.control}
@@ -168,29 +173,29 @@ export default function RegisterForm() {
                   </FormItem>
                 )}
               />
-                {/* Role */}
-                    <FormField
-  control={form.control}
-  name="Role"
-  render={({ field }) => (
-    <FormItem >
-      <FormLabel>Role</FormLabel>
-      <FormControl>
-        <select
-          {...field}
-          className="w-full border rounded p-2"
-        >
-          <option value="USER">USER</option>
-          <option value="ADMIN">ADMIN</option>
-        </select>
-      </FormControl>
-      <FormMessage />
-      <FormDescription>
-        Select your role. Admin role is usually restricted.
-      </FormDescription>
-    </FormItem>
-  )}
-/>
+              {/* Role */}
+              <FormField
+                control={form.control}
+                name="Role"
+                render={({ field }) => (
+                  <FormItem >
+                    <FormLabel>Role</FormLabel>
+                    <FormControl>
+                      <select
+                        {...field}
+                        className="w-full border rounded p-2"
+                      >
+                        <option value="USER">USER</option>
+                        <option value="ADMIN">ADMIN</option>
+                      </select>
+                    </FormControl>
+                    <FormMessage />
+                    <FormDescription>
+                      Select your role. Admin role is usually restricted.
+                    </FormDescription>
+                  </FormItem>
+                )}
+              />
 
               {/* Location */}
               <FormField
@@ -200,9 +205,8 @@ export default function RegisterForm() {
                   <FormItem>
                     <FormLabel>Location</FormLabel>
                     <FormControl>
-                      <Input placeholder="City, Country" {...field} />
+                      <Input placeholder="City, Country" {...field} required={false} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -215,9 +219,8 @@ export default function RegisterForm() {
                   <FormItem>
                     <FormLabel>GitHub</FormLabel>
                     <FormControl>
-                      <Input placeholder="https://github.com/username" {...field} />
+                      <Input placeholder="https://github.com/username" {...field} required={false} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -229,9 +232,8 @@ export default function RegisterForm() {
                   <FormItem>
                     <FormLabel>LinkedIn</FormLabel>
                     <FormControl>
-                      <Input placeholder="https://linkedin.com/in/username" {...field} />
+                      <Input placeholder="https://linkedin.com/in/username" {...field} required={false} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -243,9 +245,8 @@ export default function RegisterForm() {
                   <FormItem>
                     <FormLabel>Facebook</FormLabel>
                     <FormControl>
-                      <Input placeholder="https://facebook.com/username" {...field} />
+                      <Input placeholder="https://facebook.com/username" {...field} required={false} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -257,18 +258,18 @@ export default function RegisterForm() {
                   <FormItem>
                     <FormLabel>Twitter</FormLabel>
                     <FormControl>
-                      <Input placeholder="https://twitter.com/username" {...field} />
+                      <Input placeholder="https://twitter.com/username" {...field} required={false} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
 
               {/* Submit */}
-              <div className="col-span-2 flex justify-center">
-                <Button type="submit" disabled={loading} className="w-full md:w-auto">
+              <div className="col-span-2 flex flex-col items-center">
+                <Button type="submit" disabled={loading} className="w-full md:w-1/2 my-3 text-base font-semibold text-white bg-primary hover:bg-primary/80 cursor-pointer">
                   {loading ? "Registering..." : "Register"}
                 </Button>
+                <p>Already have an account? <Link href="/login" className="text-primary hover:underline">Login</Link></p>
               </div>
             </form>
           </Form>

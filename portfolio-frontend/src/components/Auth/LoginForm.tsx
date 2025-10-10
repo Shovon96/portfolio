@@ -37,44 +37,44 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
- const onSubmit = async (values: LoginFormValues) => {
-  try {
-    setLoading(true);
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-      credentials: "include",
-    });
+  const onSubmit = async (values: LoginFormValues) => {
+    try {
+      setLoading(true);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+        credentials: "include",
+      });
 
-    const data = await res.json();
-    console.log(data.data.id)
-    if (data) {
-      toast.success("User logged in successfully");
-      router.push("/");
-    } else {
-      toast.error(data.message || "Login failed");
+      const data = await res.json();
+      // console.log(data.data.id)
+      if (data) {
+        toast.success("User logged in successfully");
+        router.push("/");
+      } else {
+        toast.error(data.message || "Login failed");
+      }
+    } catch (error: any) {
+      // console.log(error.message);
+      toast.error("User can't Login");
+    } finally {
+      setLoading(false);
     }
-  } catch (error: any) {
-    console.log(error.message);
-    toast.error("User can't Login");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
 
   return (
-    // <div className="flex justify-center items-center min-h-screen bg-gradient-to-tr from-blue-300 via-green-200 to-blue-200 p-6">
-    <div className="flex justify-center items-center min-h-screen  p-6">
-      <Card className="w-full max-w-md shadow-2xl backdrop-blur-lg bg-white/70 rounded-3xl">
+    <div className="flex justify-center items-center min-h-screen p-6"
+      style={{ backgroundImage: 'url("https://i.ibb.co.com/4nDvt3Rv/login-background-image.png")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <Card className="w-full max-w-md shadow-2xl backdrop-blur-lg bg-white/60 dark:bg-black/60 rounded-3xl">
         <CardHeader>
-          <CardTitle className="text-3xl font-bold text-center text-gray-800">Welcome Back</CardTitle>
+          <CardTitle className="text-3xl font-bold text-center text-black dark:text-primary">Welcome Back</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              
+
               {/* Email Field */}
               <FormField
                 control={form.control}
@@ -111,7 +111,7 @@ export default function LoginForm() {
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700"
                         >
                           {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                         </button>
@@ -123,15 +123,15 @@ export default function LoginForm() {
               />
 
               {/* Submit Button */}
-              <Button type="submit" className="w-full py-3 text-lg font-semibold" disabled={loading}>
+              <Button type="submit" className="w-full py-3 text-lg font-semibold text-white bg-primary hover:bg-primary/80 cursor-pointer" disabled={loading}>
                 {loading ? "Logging in..." : "Login"}
               </Button>
             </form>
           </Form>
         </CardContent>
-       <div className="flex justify-center mt-4 underline">
-         <Link href={"register"}>Register Now</Link>
-       </div>
+        <div className="flex justify-center underline hover:text-primary">
+          <Link href={"register"}>Register Now</Link>
+        </div>
       </Card>
     </div>
   )

@@ -7,9 +7,7 @@ import React from 'react';
 const LoginPage = () => {
     return (
         <div>
-          
             <LoginForm></LoginForm>
-            <Link href={"/register"} >Register</Link>
         </div>
     );
 };
