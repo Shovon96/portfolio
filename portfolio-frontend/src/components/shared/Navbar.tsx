@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Link as ScrollLink } from "react-scroll";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Github, Menu, UserRound, X } from "lucide-react";
 import ThemeToggle from "../theme-toggle";
 import CustomButton from "./CustomButton";
@@ -11,6 +11,35 @@ import { usePathname, useRouter } from "next/navigation";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const [user, setUser] = useState<any>(null);
+
+  // user role handle
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/me`, {
+        credentials: "include",
+        cache: "no-store"
+      });
+      const json = await res.json();
+      setUser(json);
+    };
+
+    fetchData();
+    window.addEventListener("userUpdated", fetchData);
+    return () => window.removeEventListener("userUpdated", fetchData);
+  }, []);
+  console.log(user)
+  const userRole = user?.Role;
+
+  // logout handle
+  const logout = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/logout`, {
+      method: "POST",
+      credentials: "include",
+      cache: "no-store"
+    });
+    window.dispatchEvent(new Event("userUpdated"));
+  };
 
   const linksDesktop = [
     { href: "home", label: "Home" },
@@ -88,7 +117,24 @@ export default function Navbar() {
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
-            <Link className="hidden md:flex space-x-6" href="/login"><CustomButton icon={UserRound} buttonText="Login"></CustomButton></Link>
+            {user ? (
+              userRole === "ADMIN" ? (
+                <Link href="/dashboard" className="hidden md:flex space-x-6">
+                  <CustomButton buttonText="Dashboard" />
+                </Link>
+              ) : userRole === "USER" ? (
+                <button onClick={logout} className="hidden md:flex space-x-6">
+                  <CustomButton buttonText="Logout" />
+                </button>
+              ) : <Link href="/login" className="hidden md:flex space-x-6">
+                <CustomButton icon={UserRound} buttonText="Login" />
+              </Link>
+            ) : (
+              <Link href="/login" className="hidden md:flex space-x-6">
+                <CustomButton icon={UserRound} buttonText="Login" />
+              </Link>
+            )}
+
           </div>
         </div>
       </div>

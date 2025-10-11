@@ -49,6 +49,7 @@ export default function LoginForm() {
 
       const data = await res.json();
       // console.log(data.data.id)
+      window.dispatchEvent(new Event("userUpdated"));
       if (data) {
         toast.success("User logged in successfully");
         router.push("/");
