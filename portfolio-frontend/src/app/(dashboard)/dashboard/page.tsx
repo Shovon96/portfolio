@@ -1,41 +1,76 @@
+"use client"
 
-const DashboardHomePage = async () => {
+import { Facebook, Github, LinkedinIcon, Twitter } from "lucide-react";
+import { useEffect, useState } from "react";
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/me`, {
-        credentials: "include",
-        cache: "no-store"
-    });
-    const user = await res.json();
-    console.log(user)
+const DashboardHomePage = () => {
+
+    const [user, setUser] = useState<any>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/me`, {
+                credentials: "include",
+                cache: "no-store"
+            });
+            const json = await res.json();
+            setUser(json);
+        };
+
+        fetchData();
+        window.addEventListener("userUpdated", fetchData);
+        return () => window.removeEventListener("userUpdated", fetchData);
+    }, []);
+    // console.log("session", user)
 
     return (
-        <div className="mx-auto bg-white shadow-lg rounded-lg p-6 max-h-[300px]" >
+        <div className="mx-auto bg-white shadow-lg rounded-lg p-6 h-fit w-md my-8">
             <div className="flex items-center space-x-4">
                 <img
-                    src={user?.image || "https://via.placeholder.com/100"}
+                    src={user?.avatarUrl || "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg"}
                     alt="User Avatar"
-                    className="w-20 h-20 rounded-full border"
+                    className="w-20 h-20 rounded-full border border-primary"
                 />
                 <div>
                     <h2 className="text-xl font-semibold text-gray-800">
-                        {user?.name || "Unknown User"}
+                        <b>Name: </b>{user?.name || "Unknown User"}
                     </h2>
-                    <p className="text-gray-600">{user?.email || "No Email Provided"}</p>
+                    <p className="text-gray-600"><b>Email: </b>{user?.email || "No Email Provided"}</p>
+                    <p className="text-gray-600"><b>Role: </b>{user?.Role || "No Role Provided"}</p>
+                    <p className="text-gray-600"><b>Address: </b>{user?.location || "No Address Provided"}</p>
                 </div>
             </div>
-
-            <div className="mt-6 border-t pt-4">
-                <h3 className="text-lg font-medium text-gray-700 mb-2">
-                    Personal Information
-                </h3>
-                <ul className="space-y-2 text-gray-600">
-                    <li>
-                        <strong>Name:</strong> {user?.name || "N/A"}
-                    </li>
-                    <li>
-                        <strong>Email:</strong> {user?.email || "N/A"}
-                    </li>
-                </ul>
+            <div>
+                {user?.bio &&
+                    <p className="text-gray-600 mt-2"><b></b>{user?.bio}</p>
+                }
+                {/* Social Icons */}
+                <div className="flex gap-6 mt-3 text-2xl">
+                    {user?.facebook &&
+                        <a href={user?.facebook} target="_blank" rel="noopener noreferrer"
+                            className="border-2 border-primary p-2 rounded-full text-primary hover:text-white hover:bg-primary/80 transition duration-300">
+                            <Facebook />
+                        </a>
+                    }
+                    {user?.linkedin &&
+                        <a href={user?.linkedin} target="_blank" rel="noopener noreferrer"
+                            className="border-2 border-primary p-2 rounded-full text-primary hover:text-white hover:bg-primary/80 transition duration-300">
+                            <LinkedinIcon />
+                        </a>
+                    }
+                    {user?.github &&
+                        <a href={user?.github} target="_blank" rel="noopener noreferrer"
+                            className="border-2 border-primary p-2 rounded-full text-primary hover:text-white hover:bg-primary/80 transition duration-300">
+                            <Github />
+                        </a>
+                    }
+                    {user?.twitter &&
+                        <a href={user?.twitter} target="_blank" rel="noopener noreferrer"
+                            className="border-2 border-primary p-2 rounded-full text-primary hover:text-white hover:bg-primary/80 transition duration-300">
+                            <Twitter />
+                        </a>
+                    }
+                </div>
             </div>
         </div>
     );

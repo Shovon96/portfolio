@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Home, PlusCircle, LogOut } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Home, PlusCircle, LogOut, User, BookCheck, SearchCheck } from "lucide-react";
+import { use, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
 
     const [session, setSession] = useState<any>(null);
+    const pathname = usePathname();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,9 +36,17 @@ export default function Sidebar() {
         window.dispatchEvent(new Event("userUpdated"));
     };
 
+    const dashboardLinks = [
+        { href: "/", label: "Home", icon: <Home /> },
+        { href: "/dashboard", label: "Manage Profile", icon: <User /> },
+        { href: "/dashboard/manage-blog", label: "Manage Blog", icon: <BookCheck /> },
+        { href: "/dashboard/manage-project", label: "Manage Project", icon: <PlusCircle /> },
+        { href: "/dashboard/manage-skill", label: "Manage Skill", icon: <SearchCheck /> },
+    ];
+
     return (
         <aside className="flex min-h-screen w-64 flex-col border-r bg-black text-white">
-            <div className="flex justify-start items-center gap-4 mt-3 px-4">
+            <div className="flex justify-start items-center gap-4 py-3 px-4 border-b">
                 <img
                     src={session?.avatarUrl || "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg"}
                     alt="User Avatar"
@@ -46,21 +56,22 @@ export default function Sidebar() {
             </div>
             {/* Top navigation */}
             <nav className="flex-1 space-y-2 p-4">
-                <Link
-                    href="/"
-                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-100 hover:text-black"
-                >
-                    <Home className="h-4 w-4" />
-                    Home
-                </Link>
-
-                <Link
-                    href="/dashboard/create-blog"
-                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-100 hover:text-black"
-                >
-                    <PlusCircle className="h-4 w-4" />
-                    Manage Blog
-                </Link>
+                {dashboardLinks?.map((link) => {
+                    const isActive = pathname === link.href;
+                    return (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className={`transition ${isActive
+                                ? "flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium bg-zinc-800 hover:bg-gray-100 hover:text-black"
+                                : "flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-100 hover:text-black"
+                                }`}
+                        >
+                            {link.icon}
+                            {link.label}
+                        </Link>
+                    );
+                })}
             </nav>
 
             {/* Bottom action */}
