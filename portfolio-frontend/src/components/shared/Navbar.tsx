@@ -28,7 +28,7 @@ export default function Navbar() {
     window.addEventListener("userUpdated", fetchData);
     return () => window.removeEventListener("userUpdated", fetchData);
   }, []);
-  console.log(user)
+  // console.log(user)
   const userRole = user?.Role;
 
   // logout handle
