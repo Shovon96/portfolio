@@ -2,6 +2,7 @@
 
 import { Facebook, Github, LinkedinIcon, Twitter } from "lucide-react";
 import { useEffect, useState } from "react";
+import UpdateUserModal from "./User/UpdateUserModal";
 
 const DashboardHomePage = () => {
 
@@ -24,7 +25,7 @@ const DashboardHomePage = () => {
     // console.log("session", user)
 
     return (
-        <div className="mx-auto bg-white shadow-lg rounded-lg p-6 h-fit w-md my-8">
+        <div className="mx-auto bg-white/80 shadow-lg rounded-lg p-6 h-fit w-md my-8">
             <div className="flex items-center space-x-4">
                 <img
                     src={user?.avatarUrl || "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg"}
@@ -45,7 +46,7 @@ const DashboardHomePage = () => {
                     <p className="text-gray-600 mt-2"><b></b>{user?.bio}</p>
                 }
                 {/* Social Icons */}
-                <div className="flex gap-6 mt-3 text-2xl">
+                <div className="flex items-center gap-6 mt-3 text-2xl">
                     {user?.facebook &&
                         <a href={user?.facebook} target="_blank" rel="noopener noreferrer"
                             className="border-2 border-primary p-2 rounded-full text-primary hover:text-white hover:bg-primary/80 transition duration-300">
@@ -70,6 +71,8 @@ const DashboardHomePage = () => {
                             <Twitter />
                         </a>
                     }
+                    {/* Update User Modal */}
+                    <UpdateUserModal user={user} onUserUpdated={() => setUser({ ...user })} />
                 </div>
             </div>
         </div>
