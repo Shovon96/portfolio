@@ -29,7 +29,7 @@ export default function BlogDetails({ blog }: { blog: IBlog }) {
                 )}
                 <h1 className="text-5xl font-bold my-6 text-white">{blog?.title}</h1>
                 <article className="prose prose-lg max-w-none text-gray-300">
-                    <p>{blog.content}</p>
+                    <p dangerouslySetInnerHTML={{ __html: blog.content.replace(/\n/g, "<br/>") }} />
                 </article>
                 <div className="flex items-center gap-4 my-4">
                     <Image

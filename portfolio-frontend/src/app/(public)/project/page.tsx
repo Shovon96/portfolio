@@ -11,7 +11,7 @@ export default async function Project() {
     const projectsData = await res.json();
     // console.log(projectsData)
     return (
-        <div id="projects" className="max-w-7xl mx-auto my-12 px-8">
+        <div className="max-w-7xl mx-auto my-12 px-8">
             <div className="flex items-center mb-8">
                 <Link href={"/"} className="flex items-center gap-2 px-2 py-1 text-white bg-[#470742] border-2 border-primary rounded-md cursor-pointer"><ArrowBigLeft /> Back</Link>
                 <div className="flex-1 justify-start">
