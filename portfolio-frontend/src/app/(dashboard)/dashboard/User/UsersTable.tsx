@@ -5,7 +5,7 @@ import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 interface User {
-    _id: string;
+    id: string;
     name: string;
     email: string;
     Role: string;
@@ -41,13 +41,13 @@ const UsersTable = () => {
         if (!confirmDelete) return;
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users/${id}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/delete/${id}`, {
                 method: "DELETE",
                 credentials: "include",
             });
 
             if (res.ok) {
-                setUsers(users.filter((user) => user._id !== id));
+                setUsers(users.filter((user) => user.id !== id));
                 toast.success("User deleted successfully");
             } else {
                 toast.error("Failed to delete user");
@@ -84,7 +84,7 @@ const UsersTable = () => {
                     {users?.length > 0 ? (
                         users.map((user, idx) => (
                             <tr
-                                key={user._id}
+                                key={user.id}
                                 className={`${idx % 2 === 0 ? "bg-gray-50 dark:bg-zinc-800/50" : "bg-white dark:bg-zinc-900"
                                     } hover:bg-gray-100 dark:hover:bg-zinc-800 transition`}
                             >
@@ -99,7 +99,7 @@ const UsersTable = () => {
                                 </td>
                                 <td className="px-6 py-4 text-center">
                                     <button
-                                        onClick={() => handleDelete(user._id)}
+                                        onClick={() => handleDelete(user.id)}
                                         className="text-red-500 hover:text-white hover:bg-red-500 p-2 rounded-md transition"
                                     >
                                         <Trash2 className="h-5 w-5" />

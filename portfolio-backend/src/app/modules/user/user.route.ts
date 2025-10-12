@@ -10,6 +10,6 @@ router.post("/create-user", userController.createUser)
 router.get("/me", checkAuth(...Object.values(Role)), userController.getSingleUser)
 router.get("/users", checkAuth(...Object.values(Role)), userController.getAllUser)
 router.patch("/update", checkAuth(...Object.values(Role)), userController.updateUser)
-router.delete("/delete", checkAuth(...Object.values(Role)), userController.deleteUser)
+router.delete("/delete/:id", checkAuth(...Object.values(Role)), userController.deleteUser)
 
 export const userRoutes = router;
