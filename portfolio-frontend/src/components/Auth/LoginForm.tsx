@@ -50,7 +50,8 @@ export default function LoginForm() {
       const data = await res.json();
       // console.log(data.data.id)
       window.dispatchEvent(new Event("userUpdated"));
-      if (data) {
+      // console.log(data)
+      if (data.data.id) {
         toast.success("User logged in successfully");
         router.push("/");
       } else {
@@ -58,7 +59,7 @@ export default function LoginForm() {
       }
     } catch (error: any) {
       // console.log(error.message);
-      toast.error("User can't Login");
+      toast.error("Something went wrong!");
     } finally {
       setLoading(false);
     }
