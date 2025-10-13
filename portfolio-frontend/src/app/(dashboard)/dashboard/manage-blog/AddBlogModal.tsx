@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import {
     Dialog,
     DialogContent,
@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function AddBlogModal() {
     const [formData, setFormData] = useState({
@@ -20,6 +21,8 @@ export default function AddBlogModal() {
         content: "",
         imageUrl: "",
     });
+
+    const router = useRouter();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -41,7 +44,7 @@ export default function AddBlogModal() {
 
             toast.success("Blog added successfully!");
             setFormData({ title: "", content: "", imageUrl: "" });
-            window.dispatchEvent(new Event("blogUpdated"));
+            router.refresh();
         } catch (error: any) {
             toast.error(error.message);
         }

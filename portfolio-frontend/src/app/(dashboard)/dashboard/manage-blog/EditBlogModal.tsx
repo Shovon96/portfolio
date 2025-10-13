@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Edit } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface EditBlogModalProps {
     blog: {
@@ -32,6 +33,7 @@ export default function EditBlogModal({ blog, onUpdate }: EditBlogModalProps) {
     });
 
     const [open, setOpen] = useState(false);
+    const router = useRouter()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -53,7 +55,7 @@ export default function EditBlogModal({ blog, onUpdate }: EditBlogModalProps) {
             onUpdate(updated);
             toast.success("Blog updated successfully!");
             setOpen(false);
-            window.location.reload()
+            router.refresh()
         } catch (error: any) {
             console.error(error);
             toast.error(error.message || "Error updating blog");
