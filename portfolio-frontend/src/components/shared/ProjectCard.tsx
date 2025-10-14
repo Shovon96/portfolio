@@ -1,3 +1,4 @@
+import EditProjectModal from "@/app/(dashboard)/dashboard/manage-project/EditProjectModal";
 import { Trash2 } from "lucide-react";
 import Link from "next/link";
 
@@ -17,7 +18,7 @@ export default function ProjectCard({ project, admin }: { project: IProjectCard,
     const { title, description, imageUrl, demoUrlFrontend, sourceCodeFrontend, sourceCodebackend, id } = project;
 
     return (
-        <div className="w-[325px] md:w-[350px] h-fit rounded-md border border-[#470742] overflow-hidden transition duration-500 hover:scale-[1.02] bg-[#470742]">
+        <div className="w-[325px] md:w-[350px] h-fit rounded-md border border-[#470742] overflow-hidden transition duration-500 hover:scale-[1.04] bg-[#470742]">
             <Link href={`/project/${id}`}>
                 <img className="w-full h-60 px-3 pt-3 object-cover overflow-hidden" src={imageUrl} alt="" />
                 <div className="bg-[#f1e5ff] px-5 pt-2">
@@ -33,9 +34,7 @@ export default function ProjectCard({ project, admin }: { project: IProjectCard,
             </Link>
             {admin === "Admin" ? (
                 <div className="flex justify-between items-center px-5 py-1 rounded-b-md bg-[#f1e5ff] h-14">
-                    <button className="text-sm flex items-center justify-center gap-1 font-semibold text-gray-900 border px-4 py-2 rounded cursor-pointer bg-yellow-400 hover:bg-yellow-500">
-                        Edit Blog
-                    </button>
+                    <EditProjectModal project={project}/>
                     <button className="text-sm flex items-center justify-center gap-1 font-semibold text-gray-900 border px-4 py-2 rounded cursor-pointer bg-red-400 hover:bg-red-500">
                         <Trash2 className="h-6 w-4" /> Delete Blog
                     </button>
