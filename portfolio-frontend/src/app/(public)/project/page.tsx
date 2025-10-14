@@ -2,6 +2,13 @@ import ProjectCard, { IProjectCard } from "@/components/shared/ProjectCard";
 import { ArrowBigLeft } from "lucide-react";
 import Link from "next/link";
 
+export const generateMetadata = async () => {
+    return {
+        title: "Projects | Fakhruddin Ahmed",
+        description:
+            "Showcasing professional and personal web development projects — crafted with React, Next.js, and TypeScript."
+    }
+}
 
 
 export default async function Project() {

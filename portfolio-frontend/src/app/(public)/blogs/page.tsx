@@ -2,6 +2,13 @@ import BlogCard, { IBlog } from "@/components/shared/BlogCard";
 import { ArrowBigLeft } from "lucide-react";
 import Link from "next/link";
 
+export const generateMetadata = async () => {
+    return {
+        title: "Blogs | Fakhruddin Ahmed",
+        description:
+            "Explore web development blogs, tips, and insights on modern technologies — written by Fakhruddin Ahmed.",
+    }
+}
 
 export default async function BlogsPage() {
 
