@@ -5,8 +5,9 @@ import EditSkillModal from "./EditSkillModal";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-export default function page() {
+export default function Page() {
 
     const [skills, setSkills] = useState([]);
     const router = useRouter();
@@ -60,7 +61,13 @@ export default function page() {
                             key={skill.id}
                             className="px-5 py-3 flex flex-col items-center gap-4 bg-gray-700 rounded-lg shadow-md shadow-primary border border-primary hover:scale-105 hover:shadow-lg transition-all duration-300"
                         >
-                            <img className="w-12 h-12" src={skill.imageUrl} alt={skill.title} />
+                            <Image
+                                width={48}
+                                height={48}
+                                className="w-12 h-12"
+                                src={skill.imageUrl}
+                                alt={skill.title}
+                            />
                             <p
                                 className="text-lg font-bold"
                                 style={{

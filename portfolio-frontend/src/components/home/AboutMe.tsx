@@ -1,6 +1,7 @@
-import Link from "next/link";
+/* eslint-disable react/no-unescaped-entities */
 import SectionTitle from "../shared/SectionTitle";
 import { Facebook, Github, LinkedinIcon } from "lucide-react";
+import Image from "next/image";
 
 const AboutMe = () => {
     return (
@@ -8,7 +9,9 @@ const AboutMe = () => {
             <div className="flex flex-col md:flex-row items-center gap-12">
                 {/* Image Section */}
                 <div className="w-full md:w-1/2 flex justify-center">
-                    <img
+                    <Image
+                        width={420}
+                        height={480}
                         src="https://i.ibb.co.com/0jgXw2Lk/Fakhruddin-Ahmed-bg-remove-image-8f100d2b8000-1.png"
                         alt="avatar"
                         className="h-[480px] w-[420px] object-cover rounded-xl hover:shadow-chart-5 hover:shadow-2xl border-4 border-primary transform hover:scale-105 transition duration-500"

@@ -9,20 +9,20 @@ import { projectRouter } from "./app/modules/project/project.route";
 import { blogRouter } from "./app/modules/blog/blog.route";
 import { skillsRouter } from "./app/modules/skills/skills.route";
 
-const app=express()
+const app = express()
 
-app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
+app.use(cors({ origin: ["http://localhost:3000", "https://fakhruddin-ahmed-portfolio.vercel.app"], credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(expressSession({ secret: "secret", resave: false, saveUninitialized: false }));
 
 
-app.use("/api/v1",userRoutes)
-app.use("/api/v1",authRouter)
-app.use("/api/v1",projectRouter)
-app.use("/api/v1",blogRouter)
-app.use("/api/v1",skillsRouter)
+app.use("/api/v1", userRoutes)
+app.use("/api/v1", authRouter)
+app.use("/api/v1", projectRouter)
+app.use("/api/v1", blogRouter)
+app.use("/api/v1", skillsRouter)
 
 
 app.get("/", (req, res) => {

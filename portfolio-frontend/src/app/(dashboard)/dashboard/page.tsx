@@ -4,6 +4,7 @@ import { Facebook, Github, LinkedinIcon, Twitter } from "lucide-react";
 import { useEffect, useState } from "react";
 import UpdateUserModal from "./User/UpdateUserModal";
 import UsersTable from "./User/UsersTable";
+import Image from "next/image";
 
 const DashboardHomePage = () => {
 
@@ -29,10 +30,12 @@ const DashboardHomePage = () => {
         <div className="flex flex-col items-center w-full">
             <div className="mx-auto bg-white/80 shadow-lg rounded-lg p-6 h-fit w-md my-8">
                 <div className="flex items-center space-x-4">
-                    <img
+                    <Image
                         src={user?.avatarUrl || "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg"}
                         alt="User Avatar"
                         className="w-20 h-20 rounded-full border border-primary"
+                        width={80}
+                        height={80}
                     />
                     <div>
                         <h2 className="text-xl font-semibold text-gray-800">

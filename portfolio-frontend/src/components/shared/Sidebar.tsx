@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Home, PlusCircle, LogOut, User, BookCheck, SearchCheck } from "lucide-react";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function Sidebar() {
 
@@ -47,10 +48,12 @@ export default function Sidebar() {
     return (
         <aside className="flex min-h-screen w-64 flex-col border-r bg-black text-white">
             <div className="flex justify-start items-center gap-4 py-3 px-4 border-b">
-                <img
+                <Image
+                    height={32}
+                    width={32}
                     src={session?.avatarUrl || "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg"}
                     alt="User Avatar"
-                    className="w-8 h-8 rounded-full border"
+                    className="rounded-full border"
                 />
                 <p className="font-bold text-lg">{session?.name}</p>
             </div>

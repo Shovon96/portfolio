@@ -1,7 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import EditProjectModal from "@/app/(dashboard)/dashboard/manage-project/EditProjectModal";
 import { Trash2 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
