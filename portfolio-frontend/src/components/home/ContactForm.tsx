@@ -23,7 +23,7 @@ const ContactForm = () => {
                 <span className="h-[4px] mt-2 w-10 sm:w-16 md:w-42 bg-primary"></span>
             </div>
             <div className="md:flex my-8 items-center">
-                <div className="flex-1 text-white my-8">
+                <div className="flex-1 text-forground my-8">
                     <div className="flex justify-center items-center gap-4">
                         <h1 className="text-3xl text-primary"><Mail /></h1>
                         <div>
