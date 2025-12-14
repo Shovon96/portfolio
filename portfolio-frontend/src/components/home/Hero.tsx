@@ -30,7 +30,7 @@ export default function Hero() {
                 </p>
 
                 <div className="flex gap-8 mt-4">
-                    <Link href="https://drive.google.com/file/d/1o3gSiyPTxpmZ9VEFIAKxWvoLw7a5Eqi0/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://drive.google.com/file/d/1ORDMEyLnvzIqikqATy4FWKpfOTvHxWpc/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                         <CustomButton icon={Download} buttonText="Resume" />
                     </Link>
 

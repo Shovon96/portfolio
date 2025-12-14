@@ -9,7 +9,7 @@ export default function Skills() {
             <div className="flex items-center justify-center gap-3 my-12">
                 <span className="h-[4px] mt-2 w-10 sm:w-16 md:w-42 bg-primary"></span>
                 <SectionTitle title1="Technical" />
-                <span className="text-4xl md:text-5xl font-extrabold text-primary">Me</span>
+                <span className="text-4xl md:text-5xl font-extrabold text-primary">Skills</span>
                 <span className="h-[4px] mt-2 w-10 sm:w-16 md:w-42 bg-primary"></span>
             </div>
 

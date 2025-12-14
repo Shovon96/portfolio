@@ -7,6 +7,8 @@ import { Github, Menu, UserRound, X } from "lucide-react";
 import ThemeToggle from "../theme-toggle";
 import CustomButton from "./CustomButton";
 import { usePathname, useRouter } from "next/navigation";
+// import profileLogo from "../../../public/fakhruddin-portfolio-logo-image90843 (1).png";
+// import Image from "next/image";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +57,7 @@ export default function Navbar() {
     { href: "projects", label: "Projects" },
     { href: "blogs", label: "Blogs" },
     { href: "contact", label: "Contact" },
-    { href: "/login", label: "Login" }
+    // { href: "/login", label: "Login" }
   ];
 
   const router = useRouter();
@@ -77,18 +79,23 @@ export default function Navbar() {
     router.push(href);
     setIsOpen?.(false);
   };
+  const name = "</ FA>"
 
   return (
     <nav className="w-full sticky top-0 z-50 border-b bg-white/40 backdrop-blur-md dark:bg-black/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* GitHub Link */}
-          <Link
-            href="https://github.com/Shovon96"
-          ><CustomButton icon={Github} buttonText="Github"></CustomButton>
-          </Link>
-
-          {/* Desktop Links */}
+          {/* Logo */}
+          <p className="text-primary font-extrabold text-4xl text-shadow-lg/70 text-shadow-purple-400 bg-transparent">{name}</p>
+          {/* <Image
+            src={profileLogo}
+            alt="Logo"
+            width={300}
+            height={80}
+            className="cursor-pointer w-52 h-8 md:w-72 md:h-10"
+            onClick={() => handlePageClick("/")}
+          /> */}
+          {/* Desk top Links */}
           <div className="hidden md:flex space-x-6">
             {linksDesktop.map((link) => {
               return (
@@ -117,23 +124,27 @@ export default function Navbar() {
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
-            {user ? (
-              userRole === "ADMIN" ? (
-                <Link href="/dashboard" className="hidden md:flex space-x-6">
-                  <CustomButton buttonText="Dashboard" />
+            <div className="hidden md:flex">
+              {user ? (
+                userRole === "ADMIN" ? (
+                  <Link href="/dashboard" className="hidden md:flex space-x-6">
+                    <CustomButton buttonText="Dashboard" />
+                  </Link>
+                ) : userRole === "USER" ? (
+                  <button onClick={logout} className="hidden md:flex space-x-6">
+                    <CustomButton buttonText="Logout" />
+                  </button>
+                ) : <Link
+                  href="https://github.com/Shovon96"
+                ><CustomButton icon={Github} buttonText="Github"></CustomButton>
                 </Link>
-              ) : userRole === "USER" ? (
-                <button onClick={logout} className="hidden md:flex space-x-6">
-                  <CustomButton buttonText="Logout" />
-                </button>
-              ) : <Link href="/login" className="hidden md:flex space-x-6">
-                <CustomButton icon={UserRound} buttonText="Login" />
-              </Link>
-            ) : (
-              <Link href="/login" className="hidden md:flex space-x-6">
-                <CustomButton icon={UserRound} buttonText="Login" />
-              </Link>
-            )}
+              ) : (
+                <Link
+                  href="https://github.com/Shovon96"
+                ><CustomButton icon={Github} buttonText="Github"></CustomButton>
+                </Link>
+              )}
+            </div>
 
           </div>
         </div>
