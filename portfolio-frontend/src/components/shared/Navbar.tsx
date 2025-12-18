@@ -86,7 +86,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="text-primary font-extrabold text-4xl text-shadow-lg/70 text-shadow-purple-400 bg-transparent">{name}</Link>
+          <Link href="/" className="font-extrabold text-3xl md:text-4xl">
+            <span className="bg-gradient-to-r from-primary via-purple-400 to-primary bg-clip-text text-transparent animate-gradient">
+              {name}
+            </span>
+          </Link>
           {/* <Image
             src={profileLogo}
             alt="Logo"
