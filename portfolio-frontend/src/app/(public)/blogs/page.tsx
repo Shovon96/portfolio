@@ -1,5 +1,5 @@
 import BlogCard, { IBlog } from "@/components/shared/BlogCard";
-import { ArrowBigLeft } from "lucide-react";
+import { ArrowBigLeft, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export const generateMetadata = async () => {
@@ -20,8 +20,13 @@ export default async function BlogsPage() {
 
     return (
         <div className="max-w-7xl mx-auto my-12 px-8">
-            <div className="flex items-center mb-8">
-                <Link href={"/"} className="flex items-center gap-2 px-2 py-1 text-white bg-[#470742] border-2 border-primary rounded-md cursor-pointer"><ArrowBigLeft /> Back</Link>
+            <div className="flex items-center mb-8"><Link
+                href={"/"}
+                className="group flex items-center gap-2 text-gray-300 hover:text-primary transition-all duration-300 cursor-pointer border border-gray-700 hover:border-primary/50 px-3 py-2 rounded-lg"
+            >
+                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
+                <span className="font-medium">Back to Home</span>
+            </Link>
                 <div className="flex-1 justify-start">
                     <div className="flex items-center justify-center gap-3">
                         <span className="h-[4px] mt-2 w-10 sm:w-16 md:w-42 bg-primary"></span>

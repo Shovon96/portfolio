@@ -2,62 +2,150 @@
 import Image from "next/image";
 import { IProjectCard } from "./ProjectCard";
 import Link from "next/link";
-import { ArrowBigLeft, CodeXml } from "lucide-react";
-
+import { ArrowLeft, ExternalLink, Github, Globe } from "lucide-react";
 
 export default function ProjectDetails({ project }: { project: IProjectCard }) {
     if (!project) {
         return (
-            <div className="py-20 text-center text-gray-500">Project not found.</div>
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="text-center">
+                    <h2 className="text-2xl font-bold text-gray-400">Project not found</h2>
+                    <p className="text-gray-500 mt-2">The project you're looking for doesn't exist.</p>
+                </div>
+            </div>
         );
     }
 
-    const { title, description, imageUrl, demoUrlFrontend, sourceCodeFrontend, sourceCodebackend } = project;
+    const { title, description, imageUrl, demoUrlFrontend, sourceCodeFrontend, sourceCodebackend, technologies } = project;
 
     return (
-        <section className="max-w-5xl mx-auto my-8 md:my-16">
-            <button onClick={() => window.history.back()} className="flex items-center gap-2 px-2 py-1 text-white hover:bg-[#470742] transition duration-500 border-2 border-primary rounded-md cursor-pointer mb-4">
-                <ArrowBigLeft /> Go Back
-            </button>
-            <div className="p-4 border-primary rounded-md bg-gray-800/60">
-                <div className="flex flex-col md:flex-row gap-8">
-                    <div className="w-full md:w-1/3">
+        <div className="min-h-screen bg-gradient-to-br from-gray-900/70 via-gray-800/70 to-gray-900/70">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+                {/* Back Button */}
+                <button 
+                    onClick={() => window.history.back()} 
+                    className="group flex items-center gap-2 text-gray-300 hover:text-primary transition-all duration-300 mb-8 cursor-pointer border border-gray-700 hover:border-primary/50 px-3 py-2 rounded-lg"
+                >
+                    <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
+                    <span className="font-medium">Back to Projects</span>
+                </button>
+
+                {/* Main Content */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                    {/* Left Column - Image and Actions */}
+                    <div className="space-y-6">
+                        {/* Project Image */}
                         {imageUrl && (
-                            <div className="relative h-96 w-full md:w-80 overflow-hidden">
+                            <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-2xl border border-gray-700/50 group">
                                 <Image
                                     src={imageUrl}
                                     alt={title}
                                     fill
-                                    className="rounded-md object-cover shadow-md"
+                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    priority
                                 />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             </div>
                         )}
-                        <h1 className="text-3xl font-bold my-4 text-primary">{title}</h1>
-                        <div className="flex justify-center items-center gap-2 py-2 rounded-b-md">
-                            <Link href={sourceCodeFrontend} target="_blank" rel="noopener noreferrer" >
-                                <button className="flex items-center gap-1 text-sm text-primary border font-bold shadow shadow-gray-400 border-primary px-3 py-2 rounded-md cursor-pointer hover:bg-primary hover:text-white transition duration-500">
-                                    <CodeXml /> Frontend Code
+
+                        {/* Action Buttons */}
+                        <div className="space-y-4">
+                            {/* Live Demo Button */}
+                            <Link 
+                                href={demoUrlFrontend} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="block"
+                            >
+                                <button className="w-full flex items-center justify-center gap-3 bg-primary hover:bg-primary/90 text-white font-semibold px-6 py-4 rounded-xl shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:scale-[1.02] group cursor-pointer">
+                                    <Globe className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                                    <span>View Live Demo</span>
+                                    <ExternalLink className="w-4 h-4 opacity-70" />
                                 </button>
                             </Link>
-                            <Link href={sourceCodebackend} target="_blank" rel="noopener noreferrer" >
-                                <button className="flex items-center gap-1 text-sm text-primary border font-bold shadow shadow-gray-400 border-primary px-3 py-2 rounded-md cursor-pointer hover:bg-primary hover:text-white transition duration-500">
-                                    <CodeXml /> Backend Code
-                                </button>
-                            </Link>
+
+                            {/* Source Code Buttons */}
+                            <div className="grid grid-cols-2 gap-4">
+                                <Link 
+                                    href={sourceCodeFrontend} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                >
+                                    <button className="w-full flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 text-gray-200 font-medium px-4 py-3 rounded-xl border border-gray-700 hover:border-primary/50 transition-all duration-300 group cursor-pointer">
+                                        <Github className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+                                        <span className="text-sm">Frontend</span>
+                                    </button>
+                                </Link>
+                                <Link 
+                                    href={sourceCodebackend} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                >
+                                    <button className="w-full flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 text-gray-200 font-medium px-4 py-3 rounded-xl border border-gray-700 hover:border-primary/50 transition-all duration-300 group cursor-pointer">
+                                        <Github className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+                                        <span className="text-sm">Backend</span>
+                                    </button>
+                                </Link>
+                            </div>
                         </div>
-                        <Link href={demoUrlFrontend} target="_blank" rel="noopener noreferrer" className="w-full flex justify-center">
-                            <button className="w-full font-bold text-white hover:shadow-gray-700 mt-2 shadow-md px-3 py-2 rounded-lg bg-primary cursor-pointer transition duration-500 hover:scale-105">
-                                Live Site
-                            </button>
-                        </Link>
                     </div>
-                    {/* Description section */}
-                    <div className="w-full md:w-2/3">
-                        <h2 className="text-3xl font-semibold my-4 text-white">Project Description</h2>
-                        <p className="text-gray-300">{description}</p>
+
+                    {/* Right Column - Project Info */}
+                    <div className="space-y-8">
+                        {/* Title */}
+                        <div>
+                            <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 leading-tight">
+                                {title}
+                            </h1>
+                            <div className="h-1 w-20 bg-primary rounded-full" />
+                        </div>
+
+                        {/* Technologies */}
+                        <div className="space-y-3">
+                            <h2 className="text-lg font-semibold text-gray-300 uppercase tracking-wider">
+                                Tech Stack
+                            </h2>
+                            <div className="flex flex-wrap gap-2">
+                                {technologies?.map((tech, index) => (
+                                    <span 
+                                        key={index} 
+                                        className="px-4 py-2 bg-gradient-to-r from-primary/20 to-primary/10 border border-primary/30 text-primary font-medium rounded-lg text-sm hover:border-primary/60 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 cursor-default"
+                                    >
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Description */}
+                        <div className="space-y-4">
+                            <h2 className="text-2xl font-bold text-white">
+                                About This Project
+                            </h2>
+                            <div className="prose prose-invert max-w-none">
+                                <p className="text-gray-300 leading-relaxed text-base md:text-lg">
+                                    {description}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Additional Info Card */}
+                        <div className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-6 backdrop-blur-sm">
+                            <div className="flex items-start gap-4">
+                                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                                    <ExternalLink className="w-6 h-6 text-primary" />
+                                </div>
+                                <div>
+                                    <h3 className="text-white font-semibold mb-1">Open Source</h3>
+                                    <p className="text-gray-400 text-sm">
+                                        This project is open source. Feel free to explore the code and contribute!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     );
 }
