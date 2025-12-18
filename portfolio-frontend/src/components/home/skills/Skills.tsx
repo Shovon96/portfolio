@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import FrontendSkills from "./FrontendSkills"
 import BackendSkills from "./BackendSkills"
 import SectionTitle from "@/components/shared/SectionTitle"
+import Tools from "./Tools"
 
 export default function Skills() {
     return (
@@ -15,14 +16,18 @@ export default function Skills() {
 
             <Tabs defaultValue="frontend" className="max-w-7xl px-4 flex flex-col items-center justify-center mx-auto my-10">
                 <TabsList className="py-5">
-                    <TabsTrigger className="px-5 py-4" value="frontend">Frontend Skills</TabsTrigger>
-                    <TabsTrigger className="px-5 py-4" value="backend">Backend Skills</TabsTrigger>
+                    <TabsTrigger className="px-5 py-4 cursor-pointer" value="frontend">Frontend</TabsTrigger>
+                    <TabsTrigger className="px-5 py-4 cursor-pointer" value="backend">Backend</TabsTrigger>
+                    <TabsTrigger className="px-5 py-4 cursor-pointer" value="tools">Tools</TabsTrigger>
                 </TabsList>
                 <TabsContent value="frontend">
                     <FrontendSkills />
                 </TabsContent>
                 <TabsContent value="backend">
                     <BackendSkills />
+                </TabsContent>
+                <TabsContent value="tools">
+                    <Tools />
                 </TabsContent>
             </Tabs>
         </>

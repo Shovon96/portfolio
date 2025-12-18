@@ -102,6 +102,7 @@ export default function AddSkillModal() {
                             <SelectContent>
                                 <SelectItem value="Frontend">Frontend</SelectItem>
                                 <SelectItem value="Backend">Backend</SelectItem>
+                                <SelectItem value="Tools">Tools</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
