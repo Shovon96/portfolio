@@ -7,7 +7,7 @@ export default async function Blogs() {
         cache: 'no-store'
     });
     const projectsData = await res.json();
-    console.log("project", projectsData)
+    // console.log("project", projectsData)
     const admin = "Admin";
 
     return (

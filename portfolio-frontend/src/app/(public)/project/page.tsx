@@ -16,7 +16,7 @@ export default async function Project() {
         cache: 'no-store'
     });
     const projectsData = await res.json();
-    // console.log(projectsData)
+    console.log(projectsData);
     return (
         <div className="max-w-7xl mx-auto my-12 px-8">
             <div className="flex items-center mb-8">

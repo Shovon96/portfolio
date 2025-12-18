@@ -13,29 +13,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model User{
-  id Int @id @default(autoincrement())
-  name String
-  email String @unique
-  password String? 
-  Role Role @default(USER)
-  bio         String?   // optional short intro
-  avatarUrl   String?   // profile picture
-  location    String?   // city, country 
+model User {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String  @unique
+  password  String?
+  Role      Role    @default(USER)
+  bio       String? // optional short intro
+  avatarUrl String? // profile picture
+  location  String? // city, country 
 
   // Social links
-  github      String?
-  linkedin    String?
-  facebook    String?
-  twitter     String?
+  github   String?
+  linkedin String?
+  facebook String?
+  twitter  String?
 
   // Timestamps
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  projects Project[]
-  blogs Blog[]
-  skill Skill[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  projects  Project[]
+  blogs     Blog[]
+  skill     Skill[]
 }
 
 enum Role {
@@ -50,18 +49,19 @@ enum SkillType {
 }
 
 model Project {
-  id Int @id @default(autoincrement())
-  title String
-  description String
-  imageUrl    String?
-  demoUrlFrontend     String?
-  demoUrlBackend   String?
-  sourceCodeFrontend  String?
+  id                 Int      @id @default(autoincrement())
+  title              String
+  description        String
+  imageUrl           String?
+  technologies       String[] @default([])
+  demoUrlFrontend    String?
+  demoUrlBackend     String?
+  sourceCodeFrontend String?
   sourceCodebackend  String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  userId Int
-  user User @relation(fields: [userId], references: [id])
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  userId             Int
+  user               User     @relation(fields: [userId], references: [id])
 }
 
 model Blog {
@@ -70,15 +70,15 @@ model Blog {
   content     String
   imageUrl    String?
   publishedAt DateTime @default(now())
-  userId Int
-  user User @relation(fields: [userId],references: [id])
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
 }
 
 model Skill {
-  id          Int      @id @default(autoincrement())
-  title       String
-  imageUrl    String?
-  skillType    SkillType  @default(Frontend)
-  userId Int
-  user User @relation(fields: [userId],references: [id])
+  id        Int       @id @default(autoincrement())
+  title     String
+  imageUrl  String?
+  skillType SkillType @default(Frontend)
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
 }
