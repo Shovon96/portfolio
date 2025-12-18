@@ -21,6 +21,7 @@ export default function EditProjectModal({ project, onUpdate }: EditProjectModal
         description: project.description,
         imageUrl: project.imageUrl,
         demoUrlFrontend: project.demoUrlFrontend,
+        technologies: Array.isArray(project.technologies) ? project.technologies.join(', ') : '',
         sourceCodeFrontend: project.sourceCodeFrontend,
         sourceCodebackend: project.sourceCodebackend,
     });
@@ -36,11 +37,22 @@ export default function EditProjectModal({ project, onUpdate }: EditProjectModal
         e.preventDefault();
 
         try {
+            // Convert comma-separated technologies string to array
+            const technologiesArray = formData.technologies
+                .split(',')
+                .map(tech => tech.trim())
+                .filter(tech => tech.length > 0);
+
+            const payload = {
+                ...formData,
+                technologies: technologiesArray,
+            };
+
             const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project/${project.id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
-                body: JSON.stringify(formData),
+                body: JSON.stringify(payload),
             });
 
             if (!res.ok) throw new Error("Failed to update project");
@@ -68,7 +80,7 @@ export default function EditProjectModal({ project, onUpdate }: EditProjectModal
                     <DialogTitle>Edit Project</DialogTitle>
                 </DialogHeader>
 
-                <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+                <form onSubmit={handleSubmit} className="space-y-4 mt-4 overflow-y-scroll max-h-[70vh]">
                     <div>
                         <label className="text-sm font-semibold">Title</label>
                         <Input
@@ -109,6 +121,16 @@ export default function EditProjectModal({ project, onUpdate }: EditProjectModal
                             value={formData.demoUrlFrontend}
                             onChange={handleChange}
                             placeholder="Enter live demo link"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="text-sm font-semibold">Technologies</label>
+                        <Input
+                            name="technologies"
+                            value={formData.technologies}
+                            onChange={handleChange}
+                            placeholder="Enter project technologies"
                         />
                     </div>
 

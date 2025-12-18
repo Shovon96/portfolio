@@ -15,6 +15,7 @@ export default function AddProjectModal() {
         description: "",
         imageUrl: "",
         demoUrlFrontend: "",
+        technologies: "",
         sourceCodeFrontend: "",
         sourceCodebackend: "",
     });
@@ -29,22 +30,34 @@ export default function AddProjectModal() {
         e.preventDefault();
 
         try {
+            // Convert comma-separated technologies string to array
+            const technologiesArray = formData.technologies
+                .split(',')
+                .map(tech => tech.trim())
+                .filter(tech => tech.length > 0);
+
+            const payload = {
+                ...formData,
+                technologies: technologiesArray,
+            };
+
             const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/create-project`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
-                body: JSON.stringify(formData),
+                body: JSON.stringify(payload),
             });
 
             if (!res.ok) throw new Error("Failed to add project");
 
-            const data = await res.json();
+            await res.json();
             toast.success("Project added successfully!");
             setFormData({
                 title: "",
                 description: "",
                 imageUrl: "",
                 demoUrlFrontend: "",
+                technologies: "",
                 sourceCodeFrontend: "",
                 sourceCodebackend: "",
             });
@@ -68,7 +81,7 @@ export default function AddProjectModal() {
                     <DialogTitle>Add New Project</DialogTitle>
                 </DialogHeader>
 
-                <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+                <form onSubmit={handleSubmit} className="space-y-4 mt-4 overflow-y-scroll max-h-[70vh]">
                     <div>
                         <label className="text-sm font-semibold">Title</label>
                         <Input
@@ -115,6 +128,17 @@ export default function AddProjectModal() {
                     </div>
 
                     <div>
+                        <label className="text-sm font-semibold">Technologies (comma separated)</label>
+                        <Input
+                            name="technologies"
+                            value={formData.technologies}
+                            onChange={handleChange}
+                            placeholder="Enter technologies used"
+                            required
+                        />
+                    </div>
+
+                    <div>
                         <label className="text-sm font-semibold">Frontend Source Code</label>
                         <Input
                             name="sourceCodeFrontend"
@@ -136,7 +160,7 @@ export default function AddProjectModal() {
                         />
                     </div>
 
-                    <Button type="submit" className="w-full bg-primary hover:bg-primary/80 text-white">
+                    <Button type="submit" className="w-full bg-primary hover:bg-primary/80 text-white cursor-pointer">
                         Add Project
                     </Button>
                 </form>

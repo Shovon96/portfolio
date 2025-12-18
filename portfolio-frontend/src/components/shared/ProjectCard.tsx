@@ -15,6 +15,7 @@ export interface IProjectCard {
     description: string;
     imageUrl: string;
     demoUrlFrontend: string;
+    technologies: string[];
     sourceCodeFrontend: string;
     sourceCodebackend: string;
 }
