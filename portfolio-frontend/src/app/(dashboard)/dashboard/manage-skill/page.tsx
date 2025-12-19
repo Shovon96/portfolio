@@ -24,7 +24,7 @@ export default function Page() {
 
         fetchData();
         router.refresh();
-    }, []);
+    }, [router]);
 
     // delete skill
     const handleDelete = async (id: string) => {

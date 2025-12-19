@@ -1,5 +1,5 @@
-/* eslint-disable react/no-unescaped-entities */
 "use client";
+
 import { MapPin, Mail, Phone, ArrowUp, Heart, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Link as ScrollLink } from "react-scroll";
@@ -81,7 +81,7 @@ export default function Footer() {
                                 Fakhruddin Ahmed
                             </span>
                         </h2>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
+                        <p className="text-sm leading-relaxed text-white">
                             Full Stack Developer with strong fundamental knowledge in web development, building modern web experiences with Next.js, TypeScript, Tailwind, and scalable technologies.
                         </p>
 
@@ -202,7 +202,7 @@ export default function Footer() {
                 {/* Bottom Bar */}
                 <div className="border-t border-gray-700/50 py-6">
                     <div className="flex flex-col md:flex-row items-center justify-between">
-                        <p className="text-sm text-muted-foreground text-center md:text-left">
+                        <p className="text-sm text-center md:text-left text-white">
                             © {new Date().getFullYear()} Fakhruddin Ahmed. All rights reserved.
                         </p>
                             <button

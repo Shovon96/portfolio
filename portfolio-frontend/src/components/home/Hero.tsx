@@ -1,4 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
+
 import Link from "next/link";
 import { Link as ScrollLink } from "react-scroll";
 import { useTypewriter } from "use-typewriter-hook";

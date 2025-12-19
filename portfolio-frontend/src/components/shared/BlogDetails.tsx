@@ -1,4 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
+
 import Image from "next/image";
 import { IBlog } from "./BlogCard";
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
