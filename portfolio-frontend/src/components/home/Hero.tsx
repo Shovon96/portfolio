@@ -91,7 +91,7 @@ export default function Hero() {
                         {/* CTA Buttons */}
                         <div className="flex flex-wrap gap-4 pt-4">
                             <Link
-                                href="https://drive.google.com/file/d/1ORDMEyLnvzIqikqATy4FWKpfOTvHxWpc/view?usp=sharing"
+                                href="https://drive.google.com/file/d/1UwnUpyZtXGYLiBUh_qYSruljCx9-m7qN/view?usp=sharing"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="group"
